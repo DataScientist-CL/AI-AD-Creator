@@ -1,4 +1,4 @@
-# AI Advertisement Creator
+# AI 광고 크리에이터
 
 **AI 기반 완전 자동 광고 영상 생성 시스템**
 
