@@ -1,0 +1,74 @@
+# app/core/mock_openai_client.py
+import os
+import time
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class MockOpenAIClient:
+    """실제 API 없이 작동하는 목업 클라이언트"""
+
+    def init(self):
+        print("✅ Mock OpenAI client initialized")
+        print("🎭 Using mock responses (no real API needed)")
+
+    def generate_concept(self, brand: str, keywords: str) -> str:
+        """광고 컨셉 생성 (목업)"""
+        print("🎨 Generating advertisement concept...")
+        time.sleep(1)  # API 호출 시뮬레이션
+
+        concept = f"""
+🎯 {brand} Advertisement Concept
+
+Main Message: "Experience the magic of {brand}"
+
+Scene Breakdown:
+1. Opening (0-10s): Cozy atmosphere with {keywords}
+2. Product Focus (10-20s): Featured items and happy customers  
+3. Closing (20-30s): Brand logo with memorable tagline
+
+Narration: "When you need comfort, {brand} is here for you."
+
+Visual Style: Warm colors, natural lighting, emotional connections
+"""
+        print("✅ Concept generated successfully")
+        return concept
+
+    def test_connection(self) -> bool:
+        """연결 테스트 (목업)"""
+        print("🔗 Testing connection...")
+        time.sleep(0.5)
+        print("✅ Mock connection successful!")
+        return True
+
+def test_mock_system():
+    """목업 시스템 테스트"""
+    print("🧪 Mock AI Advertisement System Test")
+    print("=" * 40)
+
+    try:
+        client = MockOpenAIClient()
+
+        print("\n1️⃣ Testing Connection...")
+        if not client.test_connection():
+            return False
+
+        print("\n2️⃣ Generating Concept...")
+        concept = client.generate_concept("Starbucks", "winter, cozy, warmth")
+
+        print("\n📋 Generated Concept:")
+        print("-" * 30)
+        print(concept)
+        print("-" * 30)
+
+        print("\n🎉 Mock system test successful!")
+        print("💡 This shows how the real system would work!")
+
+        return True
+
+    except Exception as e:
+        print(f"💥 Test failed: {str(e)}")
+        return False
+
+if name == "main":
+    test_mock_system()
