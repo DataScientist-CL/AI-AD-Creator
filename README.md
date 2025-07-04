@@ -89,7 +89,7 @@ python main.py
 ```
 
 ![process](https://github.com/user-attachments/assets/445a23b2-6692-4d67-9147-c94c7dc9f6f9)
-![demo](https://github.com/user-attachments/assets/0fdd8b05-ad35-42ad-ac28-675b09ef30da)
+
 
 
 서버가 실행되면 브라우저에서 `http://localhost:8000`으로 접속하세요.
@@ -103,6 +103,9 @@ python main.py
 3. **키워드 입력**: 예) "겨울 신메뉴, 따뜻한 커피, 아늑한 분위기"
 4. **설정 선택**: 영상 길이, 품질, 음성 등
 5. **생성 시작**: 진행 상황을 실시간으로 확인
+
+![demo](https://github.com/user-attachments/assets/0fdd8b05-ad35-42ad-ac28-675b09ef30da)
+
 6. **다운로드**: 완성된 영상을 다운로드
 ![result-sample](https://github.com/user-attachments/assets/31b07d81-113b-4db1-9379-3dd1d8da996d)
 
