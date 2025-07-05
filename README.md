@@ -4,7 +4,7 @@
 
 브랜드명과 키워드만 입력하면 AI가 자동으로 **컨셉 기획 → 이미지 생성 → 음성 생성 → 영상 합성**까지 모든 과정을 처리하여 완성된 30초 광고 영상을 생성합니다.
 
-![web-ui](https://github.com/user-attachments/assets/648723d4-3460-4fd3-a8e0-0c54606d7d53)
+![web-ui](https://github.com/user-attachments/assets/5bf39577-0cda-4d10-830c-ad1680167e42)
 
 
 ## 주요 기능
