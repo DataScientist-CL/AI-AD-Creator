@@ -312,20 +312,12 @@ python main.py --debug
 
 ### 향후 개발 방향
 
-**단기 목표 (1-2개월)**
+
 - CogVideoX 대안 모델 연구 및 적용
-- BGM 생성 품질 개선 및 스타일 다양화
-- 영상 길이 확장을 위한 세그먼트 연결 로직 최적화
-
-**중기 목표 (3-6개월)**
-- 실시간 영상 스트리밍 생성 지원
-- 다국어 나레이션 지원 확대
 - 브랜드 가이드라인 자동 반영 시스템
-
-**장기 목표 (6개월+)**
-- 커스텀 모델 파인튜닝 지원
-- 대용량 배치 처리 시스템
-- 클라우드 기반 확장 아키텍처
+- BGM 생성 품질 개선 및 스타일 다양화
+- - 영상 길이 확장을 위한 세그먼트 연결 로직 최적화
+  
 
 ### 학습 성과
 
@@ -335,17 +327,7 @@ python main.py --debug
 
 ---
 
-## 기여하기
 
-1. Fork 프로젝트
-2. Feature 브랜치 생성 (`git checkout -b feature/amazing-feature`)
-3. 변경사항 커밋 (`git commit -m 'Add amazing feature'`)
-4. 브랜치에 Push (`git push origin feature/amazing-feature`)
-5. Pull Request 생성
-
-## 라이센스
-
-이 프로젝트는 MIT 라이센스 하에 제공됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ## 감사의 말
 
@@ -355,6 +337,14 @@ python main.py --debug
 - **Riffusion**: AI 음악 생성
 - **FastAPI**: 웹 프레임워크
 - **FFmpeg**: 비디오 처리
+
+
+
+## 라이센스
+
+이 프로젝트는 MIT 라이센스 하에 제공됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요. 
+
+
 
 ## 지원
 
