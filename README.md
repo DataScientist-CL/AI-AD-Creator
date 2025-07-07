@@ -231,7 +231,7 @@ REAL_AI_MODE=true
 ### 권장 시스템 사양
 - **CPU**: Intel i7 또는 AMD Ryzen 7 이상
 - **메모리**: 16GB RAM 이상
-- **GPU**: NVIDIA RTX 3070 이상 (8GB VRAM)
+- **GPU**: NVIDIA RTX 4070 이상 (8GB VRAM)
 - **저장공간**: SSD 50GB 이상
 
 ### 생성 시간 가이드
