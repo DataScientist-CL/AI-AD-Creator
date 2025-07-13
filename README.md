@@ -4,7 +4,8 @@
 
 브랜드명과 키워드만 입력하면 AI가 자동으로 **컨셉 기획 → 이미지 생성 → 음성 생성 → 영상 합성**까지 모든 과정을 처리하여 완성된 30초 광고 영상을 생성합니다.
 
-<img width="904" height="902" alt="image" src="https://github.com/user-attachments/assets/0da5bc23-6f9e-4f87-9cdc-2840d73d3108" />
+<img width="921" height="897" alt="image" src="https://github.com/user-attachments/assets/ae2f2dc3-6208-4f8d-8b69-0e18299eecb6" />
+
 
 
 ## 주요 기능
@@ -88,7 +89,7 @@ nvidia-smi
 python main.py
 ```
 
-![process](https://github.com/user-attachments/assets/445a23b2-6692-4d67-9147-c94c7dc9f6f9)
+<img width="617" height="203" alt="image" src="https://github.com/user-attachments/assets/da1b77ea-2e92-4c20-a88f-5423b39ead0e" />
 
 
 
