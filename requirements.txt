@@ -1,0 +1,38 @@
+﻿# D:\ai-ad-creator\requirements.txt
+
+# Core FastAPI and AI Frameworks
+fastapi
+uvicorn[standard]
+python-dotenv
+
+# Hugging Face Libraries:
+diffusers==0.34.0
+transformers==4.53.0
+accelerate==1.8.1
+huggingface_hub==0.33.1
+
+# Data Processing and Utilities
+numpy
+packaging>=23.2
+pydantic>=2.0.0
+Pillow>=9.0.0
+
+# Audio/Video Processing
+imageio
+imageio-ffmpeg
+librosa>=0.10.0
+numba>=0.51.0
+moviepy==2.2.1
+soundfile
+
+# OpenAI Integration
+openai
+
+# LangChain (if AdCreatorWorkflow uses it, otherwise optional)
+langchain-core>=0.3.0
+
+# Optional: For quality validation (Whisper model) and analysis
+whisper
+onnxruntime
+pydub
+tokenizers==0.21.2

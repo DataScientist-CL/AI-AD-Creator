@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 광고 크리에이터</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e1e5e9;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .video-preview {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 15px 0;
+        }
+
+        .success {
+            color: #155724;
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            margin: 15px 0;
+        }
+
+        .info {
+            color: #0c5460;
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #bee5eb;
+            margin: 15px 0;
+        }
+
+        .quick-examples {
+            margin-bottom: 20px;
+        }
+
+        .example-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .example-btn:hover {
+            background: #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 AI 광고 크리에이터</h1>
+            <p>창의적인 AI광고 영상을 생성하세요</p>
+        </div>
+
+        <div class="form-card">
+            <div class="info">
+                <strong>🎯 브랜드 맞춤 프롬프트 최적화 적용!</strong><br>
+                프롬프트에 입력한 키워드에 맞게 광고가 생성됩니다!
+            </div>
+
+            <div class="quick-examples">
+                <h4>💡 빠른 예시:</h4>
+                <button class="example-btn" onclick="setExample('nike')">나이키 운동화</button>
+                <button class="example-btn" onclick="setExample('starbucks')">스타벅스 커피</button>
+                <button class="example-btn" onclick="setExample('iphone')">애플 아이폰</button>
+                <button class="example-btn" onclick="setExample('samsung')">삼성 갤럭시</button>
+            </div>
+
+            <form id="adForm">
+                <div class="form-group">
+                    <label for="brand">브랜드명 *</label>
+                    <input type="text" id="brand" name="brand" placeholder="예: 나이키, 스타벅스, 애플" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="keywords">키워드/컨셉 *</label>
+                    <textarea id="keywords" name="keywords" placeholder="예: Just Do It, 운동화, 러닝, 젊음 / 겨울 신메뉴, 따뜻한 커피, 아늑한 분위기" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="target_audience">타겟 고객층</label>
+                        <input type="text" id="target_audience" name="target_audience" placeholder="예: 20-30대 직장인" value="일반 소비자">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="style_preference">영상 스타일</label>
+                        <select id="style_preference" name="style_preference">
+                            <option value="모던하고 깔끔한">모던하고 깔끔한</option>
+                            <option value="따뜻하고 아늑한">따뜻하고 아늑한</option>
+                            <option value="미니멀하고 프리미엄한">미니멀하고 프리미엄한</option>
+                            <option value="역동적이고 에너지">역동적이고 에너지</option>
+                            <option value="감성적이고 로맨틱">감성적이고 로맨틱</option>
+                            <option value="전문적이고 신뢰">전문적이고 신뢰</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="duration">영상 길이 (초)</label>
+                        <select id="duration" name="duration">
+                            <option value="15">15초</option>
+                            <option value="30" selected>30초</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="video_quality">영상 품질</label>
+                        <select id="video_quality" name="video_quality">
+                            <option value="fast">빠름 (1분)</option>
+                            <option value="balanced" selected>균형 (2-3분)</option>
+                            <option value="high">고품질 (5-10분)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="voice">나레이션 음성</label>
+                        <select id="voice" name="voice">
+                            <option value="alloy">Alloy (중성적)</option>
+                            <option value="echo">Echo (남성적)</option>
+                            <option value="fable">Fable (영국식)</option>
+                            <option value="onyx">Onyx (깊은 남성)</option>
+                            <option value="nova" selected>Nova (여성)</option>
+                            <option value="shimmer">Shimmer (부드러운 여성)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>추가 옵션</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="enable_bgm" name="enable_bgm">
+                            <label for="enable_bgm">배경음악 생성 (첫 실행 시 오래 걸림)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">
+                    🎬 광고 영상 생성하기
+                </button>
+            </form>
+        </div>
+
+        <div class="status-card" id="statusCard">
+            <h3>생성 진행 상황</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="statusText">준비 중...</p>
+            <p><strong>작업 ID:</strong> <span id="taskId"></span></p>
+            <div class="info">
+                <small>💡 <strong>첫 실행 시:</strong> 모델 다운로드로 인해 5-10분 소요될 수 있습니다.</small>
+            </div>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <h3>✅ 광고 영상 생성 완료!</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '';
+        let currentTaskId = null;
+        let statusInterval = null;
+
+        // 빠른 예시 설정
+        function setExample(type) {
+            const examples = {
+                nike: {
+                    brand: '나이키',
+                    keywords: 'Just Do It, 러닝화, 스포츠, 도시 조깅, 운동선수, 퍼포먼스',
+                    style: '역동적이고 에너지'
+                },
+                starbucks: {
+                    brand: '스타벅스',
+                    keywords: '겨울 신메뉴, 따뜻한 커피, 아늑한 분위기, 카페, 바리스타',
+                    style: '따뜻하고 아늑한'
+                },
+                iphone: {
+                    brand: '애플',
+                    keywords: 'iPhone, 혁신적인 기술, 세련된 디자인, 프리미엄, 라이프스타일',
+                    style: '미니멀하고 프리미엄한'
+                },
+                samsung: {
+                    brand: '삼성',
+                    keywords: 'Galaxy, 첨단 기술, 스마트폰, 혁신, 미래',
+                    style: '모던하고 깔끔한'
+                }
+            };
+
+            const example = examples[type];
+            document.getElementById('brand').value = example.brand;
+            document.getElementById('keywords').value = example.keywords;
+            document.getElementById('style_preference').value = example.style;
+        }
+
+        document.getElementById('adForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {
+                brand: formData.get('brand'),
+                keywords: formData.get('keywords'),
+                target_audience: formData.get('target_audience'),
+                style_preference: formData.get('style_preference'),
+                duration: parseInt(formData.get('duration')),
+                video_quality: formData.get('video_quality'),
+                voice: formData.get('voice'),
+                enable_bgm: formData.has('enable_bgm')
+            };
+
+            try {
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('submitBtn').innerHTML = '<span class="loading"></span>요청 처리 중...';
+                
+                const response = await fetch('/api/v1/ads/create-complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    currentTaskId = result.task_id;
+                    document.getElementById('taskId').textContent = currentTaskId;
+                    document.getElementById('statusCard').style.display = 'block';
+                    document.getElementById('resultCard').style.display = 'none';
+                    
+                    // 상태 확인 시작
+                    checkStatus();
+                    statusInterval = setInterval(checkStatus, 2000);
+                } else {
+                    throw new Error(result.detail || '요청 처리 중 오류가 발생했습니다.');
+                }
+            } catch (error) {
+                alert('오류: ' + error.message);
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').innerHTML = '🎬 광고 영상 생성하기';
+            }
+        });
+
+        async function checkStatus() {
+            if (!currentTaskId) return;
+
+            try {
+                const response = await fetch(`/api/v1/ads/status/${currentTaskId}`);
+                const status = await response.json();
+
+                document.getElementById('progressFill').style.width = status.progress + '%';
+                document.getElementById('statusText').textContent = status.current_step;
+
+                if (status.status === 'completed') {
+                    clearInterval(statusInterval);
+                    showResult();
+                } else if (status.status === 'failed') {
+                    clearInterval(statusInterval);
+                    showError(status.error);
+                }
+            } catch (error) {
+                console.error('상태 확인 오류:', error);
+            }
+        }
+
+        async function showResult() {
+            try {
+                const response = await fetch(`/api/v1/ads/result/${currentTaskId}`);
+                const result = await response.json();
+
+                const content = result.result.content;
+                const metadata = result.result.metadata;
+
+                document.getElementById('resultContent').innerHTML = `
+                    <div class="success">
+                        <strong>${metadata.brand}</strong> 브랜드 광고 영상이 성공적으로 생성되었습니다! 🎉
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <h4>📋 생성 정보</h4>
+                        <p><strong>나레이션:</strong> "${content.ad_concept.narration}"</p>
+                        <p><strong>스타일:</strong> ${metadata.style}</p>
+                        <p><strong>길이:</strong> ${metadata.duration}초</p>
+                        <p><strong>음성:</strong> ${metadata.voice}</p>
+                        <p><strong>BGM 포함:</strong> ${metadata.bgm_enabled ? '예' : '아니오'}</p>
+                        <p><strong>파일 크기:</strong> ${metadata.file_size_mb}MB</p>
+                        <p><strong>품질:</strong> ${metadata.video_quality}</p>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <a href="/download/${currentTaskId}" class="download-btn" download>
+                            📥 최종 영상 다운로드
+                        </a>
+                        <button onclick="location.reload()" class="download-btn" style="background: #6c757d;">
+                            🔄 새로운 광고 만들기
+                        </button>
+                    </div>
+                `;
+
+                document.getElementById('resultCard').style.display = 'block';
+                document.getElementById('statusCard').style.display = 'none';
+                
+                // 폼 리셋
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').innerHTML = '🎬 광고 영상 생성하기';
+                
+            } catch (error) {
+                showError('결과를 가져오는 중 오류가 발생했습니다: ' + error.message);
+            }
+        }
+
+        function showError(errorMessage) {
+            document.getElementById('resultContent').innerHTML = `
+                <div class="error">
+                    <strong>오류:</strong> ${errorMessage}
+                    <br><br>
+                    <small>💡 도움말:</small>
+                    <ul style="margin-top: 10px;">
+                        <li>첫 실행 시 모델 다운로드로 시간이 오래 걸릴 수 있습니다</li>
+                        <li>BGM을 비활성화하면 더 빠르게 생성됩니다</li>
+                        <li>인터넷 연결을 확인해주세요</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('resultCard').style.display = 'block';
+            document.getElementById('statusCard').style.display = 'none';
+            
+            // 폼 리셋
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').innerHTML = '🎬 광고 영상 생성하기';
+        }
+    </script>
+</body>
+</html>
