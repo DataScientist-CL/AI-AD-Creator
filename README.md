@@ -105,7 +105,9 @@ python main.py
 4. **설정 선택**: 영상 길이, 품질, 음성 등
 5. **생성 시작**: 진행 상황을 실시간으로 확인
 
-![demo](https://github.com/user-attachments/assets/0fdd8b05-ad35-42ad-ac28-675b09ef30da)
+![462383753-0fdd8b05-ad35-42ad-ac28-675b09ef30da](https://github.com/user-attachments/assets/d5daa4c7-9d29-4e7e-9601-b309a14455dd)
+
+
 
 6. **다운로드**: 완성된 영상을 다운로드
 ![result-sample](https://github.com/user-attachments/assets/31b07d81-113b-4db1-9379-3dd1d8da996d)
