@@ -110,7 +110,7 @@ python main.py
 
 
 6. **다운로드**: 완성된 영상을 다운로드
-![result-sample](https://github.com/user-attachments/assets/31b07d81-113b-4db1-9379-3dd1d8da996d)
+<img width="578" height="328" alt="image" src="https://github.com/user-attachments/assets/22cbf4da-be2c-4ce2-b0e8-9338daa0d016" />
 
 
 ### API 직접 사용
